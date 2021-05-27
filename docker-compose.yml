@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  django_web:
+    image: host
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+     - .:/blog
+    ports:
+     - 8000:8000
+    depends_on:
+      - migration
+  migration:
+    image: migration
+    build:
+      context: .
+      dockerfile: Dockerfile.migrations
+    volumes:
+    - .:/blog
